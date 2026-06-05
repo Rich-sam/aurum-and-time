@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Watches • Aurum & Time</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="announcement">
+      ✦ Free shipping on orders over $100 • Easy 30-day returns ✦
+    </div>
+
+    <header>
+      <div class="container header-inner">
+        <a href="index.html" class="logo">
+          <i class="far fa-gem"></i>AURUM & TIME
+        </a>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="watches.html" class="active">Watches</a>
+          <a href="jewelry.html">Jewelry</a>
+          <a href="our-story.html">Our Story</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="nav-icons">
+          <i class="far fa-user"></i>
+          <span class="cart-icon">
+            <i class="fas fa-shopping-bag"></i>
+            <span id="cart-count">0</span>
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-banner">
+      <h1>Watches</h1>
+      <p>Timeless timepieces for the modern individual</p>
+    </div>
+
+    <div class="container">
+      <div class="product-grid" id="watches-grid">
+        <!-- Loaded dynamically -->
+      </div>
+    </div>
+
+    <footer>
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <a href="watches.html">All Watches</a>
+          <a href="jewelry.html">Jewelry</a>
+        </div>
+        <div class="footer-col">
+          <h4>About</h4>
+          <a href="our-story.html">Our Story</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="contact.html">Contact Us</a>
+          <a href="#">FAQ</a>
+        </div>
+      </div>
+      <div class="container copyright">
+        &copy; 2026 Aurum & Time. All rights reserved.
+      </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script>
+      function loadWatches() {
+        const container = document.getElementById("watches-grid");
+        const watches = products.filter((p) => p.category === "watches");
+
+        container.innerHTML = watches
+          .map(
+            (product) => `
+        <div class="product-card" onclick="window.location.href='product-detail.html?id=${product.id}'">
+          ${product.isNew ? '<span class="badge">New</span>' : ""}
+          <img src="${product.images[0]}" alt="${product.name}" class="product-img">
+          <div class="product-info">
+            <h3>${product.name}</h3>
+            <p class="material">${product.material}</p>
+            <p class="price">$${product.price.toFixed(2)}</p>
+          </div>
+          <div class="product-actions">
+            <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${product.id})">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      `,
+          )
+          .join("");
+      }
+
+      document.addEventListener("DOMContentLoaded", loadWatches);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact • Aurum & Time</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="announcement">
+      ✦ Free shipping on orders over $100 • Easy 30-day returns ✦
+    </div>
+
+    <header>
+      <div class="container header-inner">
+        <a href="index.html" class="logo">
+          <i class="far fa-gem"></i>AURUM & TIME
+        </a>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="watches.html">Watches</a>
+          <a href="jewelry.html">Jewelry</a>
+          <a href="our-story.html">Our Story</a>
+          <a href="contact.html" class="active">Contact</a>
+        </nav>
+        <div class="nav-icons">
+          <span class="cart-icon">
+            <i class="fas fa-shopping-bag"></i>
+            <span id="cart-count">0</span>
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-banner">
+      <h1>Contact Us</h1>
+      <p>We'd love to hear from you</p>
+    </div>
+
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-form">
+          <h2 style="font-weight: 300; margin-bottom: 25px">Send a Message</h2>
+          <form id="contactForm" onsubmit="handleContactSubmit(event)">
+            <input type="text" placeholder="Your Name" required />
+            <input type="email" placeholder="Email Address" required />
+            <select
+              style="
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ddd;
+                margin-bottom: 15px;
+              "
+            >
+              <option>General Inquiry</option>
+              <option>Order Support</option>
+              <option>Press & Collaborations</option>
+              <option>Wholesale</option>
+            </select>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn btn-primary" style="width: 100%">
+              SEND MESSAGE
+            </button>
+          </form>
+        </div>
+        <div class="contact-info">
+          <h2 style="font-weight: 300; margin-bottom: 25px">Get in Touch</h2>
+          <p><i class="fas fa-envelope"></i> hello@aurumandtime.com</p>
+          <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+          <p><i class="fas fa-map-marker-alt"></i> New York, NY</p>
+          <p><i class="fas fa-clock"></i> Mon-Fri: 9am - 6pm EST</p>
+
+          <h3 style="font-weight: 400; margin: 30px 0 15px">Follow Us</h3>
+          <div style="display: flex; gap: 20px; font-size: 1.5rem">
+            <a href="#" style="color: #2c2c2c"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" style="color: #2c2c2c"><i class="fab fa-tiktok"></i></a>
+            <a href="#" style="color: #2c2c2c"
+              ><i class="fab fa-pinterest"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <a href="watches.html">Watches</a>
+          <a href="jewelry.html">Jewelry</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="contact.html">Contact Us</a>
+          <a href="#">FAQ</a>
+        </div>
+      </div>
+      <div class="container copyright">
+        &copy; 2026 Aurum & Time. All rights reserved.
+      </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script>
+      function handleContactSubmit(event) {
+        event.preventDefault();
+        alert("Thank you for your message! We will respond within 24 hours.");
+        event.target.reset();
+      }
+    </script>
+  </body>
+</html>

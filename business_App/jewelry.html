@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jewelry • Aurum & Time</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="announcement">
+      ✦ Free shipping on orders over $100 • Easy 30-day returns ✦
+    </div>
+
+    <header>
+      <div class="container header-inner">
+        <a href="index.html" class="logo">
+          <i class="far fa-gem"></i>AURUM & TIME
+        </a>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="watches.html">Watches</a>
+          <a href="jewelry.html" class="active">Jewelry</a>
+          <a href="our-story.html">Our Story</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="nav-icons">
+          <i class="far fa-user"></i>
+          <span class="cart-icon">
+            <i class="fas fa-shopping-bag"></i>
+            <span id="cart-count">0</span>
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-banner">
+      <h1>Jewelry</h1>
+      <p>Demi-fine pieces designed for everyday elegance</p>
+    </div>
+
+    <div class="container">
+      <!-- Category Filters -->
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterJewelry('all')">
+          All
+        </button>
+        <button class="filter-btn" onclick="filterJewelry('necklaces')">
+          Necklaces
+        </button>
+        <button class="filter-btn" onclick="filterJewelry('bracelets')">
+          Bracelets
+        </button>
+        <button class="filter-btn" onclick="filterJewelry('rings')">
+          Rings
+        </button>
+        <button class="filter-btn" onclick="filterJewelry('earrings')">
+          Earrings
+        </button>
+      </div>
+
+      <div class="product-grid" id="jewelry-grid">
+        <!-- Loaded dynamically -->
+      </div>
+    </div>
+
+    <footer>
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <a href="watches.html">Watches</a>
+          <a href="jewelry.html">Jewelry</a>
+        </div>
+        <div class="footer-col">
+          <h4>About</h4>
+          <a href="our-story.html">Our Story</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="container copyright">
+        &copy; 2026 Aurum & Time. All rights reserved.
+      </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script>
+      function filterJewelry(subcategory) {
+        // Update active button
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+
+        const container = document.getElementById("jewelry-grid");
+        let items = products.filter((p) => p.category === "jewelry");
+
+        if (subcategory !== "all") {
+          items = items.filter((p) => p.subcategory === subcategory);
+        }
+
+        renderJewelry(items, container);
+      }
+
+      function renderJewelry(items, container) {
+        container.innerHTML = items
+          .map(
+            (product) => `
+        <div class="product-card" onclick="window.location.href='product-detail.html?id=${product.id}'">
+          ${product.isNew ? '<span class="badge">New</span>' : ""}
+          <img src="${product.images[0]}" alt="${product.name}" class="product-img">
+          <div class="product-info">
+            <h3>${product.name}</h3>
+            <p class="material">${product.material}</p>
+            <p class="price">$${product.price.toFixed(2)}</p>
+          </div>
+          <div class="product-actions">
+            <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${product.id})">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      `,
+          )
+          .join("");
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById("jewelry-grid");
+        const jewelry = products.filter((p) => p.category === "jewelry");
+        renderJewelry(jewelry, container);
+      });
+    </script>
+  </body>
+</html>

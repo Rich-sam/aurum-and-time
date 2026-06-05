@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product • Aurum & Time</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="announcement">
+      ✦ Free shipping on orders over $100 • Easy 30-day returns ✦
+    </div>
+
+    <header>
+      <div class="container header-inner">
+        <a href="index.html" class="logo">
+          <i class="far fa-gem"></i>AURUM & TIME
+        </a>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="watches.html">Watches</a>
+          <a href="jewelry.html">Jewelry</a>
+          <a href="our-story.html">Our Story</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="nav-icons">
+          <span class="cart-icon">
+            <i class="fas fa-shopping-bag"></i>
+            <span id="cart-count">0</span>
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="product-detail" id="product-detail">
+        <!-- Loaded dynamically -->
+      </div>
+    </div>
+
+    <footer>
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <a href="watches.html">Watches</a>
+          <a href="jewelry.html">Jewelry</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="contact.html">Contact</a>
+          <a href="#">FAQ</a>
+        </div>
+      </div>
+      <div class="container copyright">
+        &copy; 2026 Aurum & Time. All rights reserved.
+      </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script>
+      function loadProductDetail() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get("id"));
+        const product = products.find((p) => p.id === productId);
+
+        if (!product) {
+          window.location.href = "index.html";
+          return;
+        }
+
+        document.title = `${product.name} • Aurum & Time`;
+
+        const container = document.getElementById("product-detail");
+        container.innerHTML = `
+        <div class="product-images">
+          ${product.images.map((img) => `<img src="${img}" alt="${product.name}">`).join("")}
+        </div>
+        <div class="product-info-detail">
+          ${product.isNew ? '<span class="badge">New Arrival</span>' : ""}
+          <h1>${product.name}</h1>
+          <p class="price-detail">$${product.price.toFixed(2)}</p>
+          <p class="description">${product.description}</p>
+          
+          <h4>Material</h4>
+          <p style="color:#666; margin-bottom:15px;">${product.material}</p>
+          
+          <h4>Features</h4>
+          <ul class="features-list">
+            ${product.features.map((f) => `<li><i class="fas fa-check"></i> ${f}</li>`).join("")}
+          </ul>
+          
+          <div class="quantity-selector">
+            <button onclick="changeQuantity(-1)">−</button>
+            <input type="number" id="quantity" value="1" min="1" max="10" readonly>
+            <button onclick="changeQuantity(1)">+</button>
+          </div>
+          
+          <button class="add-to-cart-lg" onclick="addToCartWithQuantity(${product.id})">
+            ADD TO CART — $${product.price.toFixed(2)}
+          </button>
+          
+          <p style="margin-top:15px; color:#888; font-size:0.85rem;">
+            <i class="fas fa-truck"></i> Free shipping over $100 • <i class="fas fa-undo"></i> 30-day returns
+          </p>
+        </div>
+      `;
+      }
+
+      function changeQuantity(delta) {
+        const input = document.getElementById("quantity");
+        let value = parseInt(input.value) + delta;
+        if (value < 1) value = 1;
+        if (value > 10) value = 10;
+        input.value = value;
+      }
+
+      function addToCartWithQuantity(productId) {
+        const quantity = parseInt(document.getElementById("quantity").value);
+        const product = products.find((p) => p.id === productId);
+
+        for (let i = 0; i < quantity; i++) {
+          addToCart(productId);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", loadProductDetail);
+    </script>
+  </body>
+</html>

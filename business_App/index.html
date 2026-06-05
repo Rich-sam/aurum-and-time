@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aurum & Time • Modern Watches & Jewelry</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="announcement">
+      ✦ Free shipping on orders over $100 • Easy 30-day returns ✦
+    </div>
+
+    <header>
+      <div class="container header-inner">
+        <a href="index.html" class="logo">
+          <i class="far fa-gem"></i>AURUM & TIME
+        </a>
+        <nav>
+          <a href="index.html" class="active">Home</a>
+          <a href="watches.html">Watches</a>
+          <a href="jewelry.html">Jewelry</a>
+          <a href="our-story.html">Our Story</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="nav-icons">
+          <i class="far fa-user"></i>
+          <i class="far fa-heart"></i>
+          <span class="cart-icon">
+            <i class="fas fa-shopping-bag"></i>
+            <span id="cart-count">0</span>
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container hero-content">
+        <h1>Timepieces & Adornments<br />for the Modern Era</h1>
+        <p>
+          Thoughtfully designed watches and demi-fine jewelry. No markups, no
+          middlemen — just attainable luxury delivered to your door.
+        </p>
+        <a href="watches.html" class="btn">Shop Watches</a>
+        <a href="jewelry.html" class="btn" style="margin-left: 15px"
+          >Shop Jewelry</a
+        >
+      </div>
+    </section>
+
+    <div class="container">
+      <h2 class="section-title">New Arrivals</h2>
+      <div class="product-grid" id="featured-products">
+        <!-- Products load dynamically from products.js -->
+      </div>
+    </div>
+
+    <div class="values">
+      <div class="value-item">
+        <i class="fas fa-gem"></i>
+        <h4>Ethically Sourced</h4>
+        <p>Conflict-free stones & recycled metals</p>
+      </div>
+      <div class="value-item">
+        <i class="fas fa-truck"></i>
+        <h4>Free Shipping & Returns</h4>
+        <p>Over $100, 30-day trial</p>
+      </div>
+      <div class="value-item">
+        <i class="fas fa-shield-alt"></i>
+        <h4>2-Year Warranty</h4>
+        <p>On all watches & fine jewelry</p>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <a href="watches.html">All Watches</a>
+          <a href="jewelry.html">Necklaces</a>
+          <a href="jewelry.html">Bracelets</a>
+          <a href="jewelry.html">Rings</a>
+          <a href="jewelry.html">Earrings</a>
+        </div>
+        <div class="footer-col">
+          <h4>About</h4>
+          <a href="our-story.html">Our Story</a>
+          <a href="our-story.html">Sustainability</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="contact.html">Contact Us</a>
+          <a href="#">Shipping & Returns</a>
+          <a href="#">FAQ</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+          <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+        </div>
+      </div>
+      <div class="container copyright">
+        &copy; 2026 Aurum & Time. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Cart Notification -->
+    <div class="cart-notification" id="notification"></div>
+
+    <script src="js/products.js"></script>
+    <script>
+      // Load featured products on homepage
+      function loadFeaturedProducts() {
+        const container = document.getElementById("featured-products");
+        const newProducts = products.filter((p) => p.isNew);
+
+        container.innerHTML = newProducts
+          .map(
+            (product) => `
+        <div class="product-card" onclick="window.location.href='product-detail.html?id=${product.id}'">
+          <img src="${product.images[0]}" alt="${product.name}" class="product-img">
+          <div class="product-info">
+            <h3>${product.name}</h3>
+            <p class="material">${product.material}</p>
+            <p class="price">$${product.price.toFixed(2)}</p>
+          </div>
+          <div class="product-actions">
+            <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${product.id})">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      `,
+          )
+          .join("");
+      }
+
+      document.addEventListener("DOMContentLoaded", loadFeaturedProducts);
+    </script>
+  </body>
+</html>
